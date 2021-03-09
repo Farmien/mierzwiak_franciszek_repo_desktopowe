@@ -1,4 +1,4 @@
-package pl.home.local.adams.listazakupow;
+package pl.home.mierzwiak.franciszek.listazakupow;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,10 +9,6 @@ import java.awt.event.KeyListener;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author adams
- */
 public class ListaZakupow extends javax.swing.JFrame{
 
     public ListaZakupow() {
