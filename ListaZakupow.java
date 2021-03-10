@@ -1,5 +1,7 @@
 package pl.home.mierzwiak.franciszek.listazakupow;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -28,7 +30,7 @@ public class ListaZakupow extends javax.swing.JFrame{
         jLabel2 = new javax.swing.JLabel();
         jTFWartosc = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTFData = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTADzisiejszeZakupy = new javax.swing.JTextArea();
@@ -48,9 +50,27 @@ public class ListaZakupow extends javax.swing.JFrame{
 
         jLabel1.setText("Wpisz co kupiłeś");
 
+        jTFCoKupiles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFCoKupilesActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Podaj wartość");
 
+        jTFWartosc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFWartoscActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Data zakupu");
+
+        jTFData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFDataActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Dzisiejsze zakupy");
 
@@ -67,6 +87,11 @@ public class ListaZakupow extends javax.swing.JFrame{
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("ZAPISZ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPWprowadzZakupyLayout = new javax.swing.GroupLayout(jPWprowadzZakupy);
         jPWprowadzZakupy.setLayout(jPWprowadzZakupyLayout);
@@ -103,7 +128,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTFData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -122,7 +147,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFCoKupiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFWartosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -178,6 +203,29 @@ public class ListaZakupow extends javax.swing.JFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTFDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDataActionPerformed
+
+    private void jTFCoKupilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCoKupilesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFCoKupilesActionPerformed
+
+    private void jTFWartoscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFWartoscActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFWartoscActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFCoKupiles.getText()+";");
+        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFWartosc.getText()+";");
+        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jComboBox1.getSelectedItem().toString()+";");
+        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFData.getText()+";\n");
+        jTFCoKupiles.setText("");
+        jTFWartosc.setText("");
+        jComboBox1.setSelectedItem("Item 1");
+        jTFData.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -240,8 +288,11 @@ public class ListaZakupow extends javax.swing.JFrame{
             @Override
             public void keyTyped(KeyEvent e) {
                 char ch = e.getKeyChar();
-                if(ch == '0' || ch == '1' || ch == '2' || ch == '3' || ch == '4' || ch == '5' || ch == '6' || ch == '7' || ch == '8' || ch == '9'){
-                    System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                if(ch >= '0' && ch <= '9' || ch == KeyEvent.VK_BACK_SPACE){
+                    jTFWartosc.setEditable(true);
+ //                   System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                }else{
+                    jTFWartosc.setEditable(false);
                 }
             }
 
@@ -254,6 +305,29 @@ public class ListaZakupow extends javax.swing.JFrame{
             }
         });
     }
+    private void addKeyListenerTojTFData(){
+        jTFData.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char ch = e.getKeyChar();
+                if(ch >= '0' && ch <= '9' || ch == KeyEvent.VK_BACK_SPACE){
+                    jTFData.setEditable(true);
+ //                   System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                }else{
+                    jTFData.setEditable(false);
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        });
+    }
+    
     
     
    
@@ -275,12 +349,11 @@ public class ListaZakupow extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTADzisiejszeZakupy;
     private javax.swing.JTextField jTFCoKupiles;
+    private javax.swing.JTextField jTFData;
     private javax.swing.JTextField jTFWartosc;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
-
-
+   
 }
