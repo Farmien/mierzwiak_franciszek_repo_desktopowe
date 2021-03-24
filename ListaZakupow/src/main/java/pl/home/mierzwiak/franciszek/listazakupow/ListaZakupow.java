@@ -17,6 +17,7 @@ public class ListaZakupow extends javax.swing.JFrame{
         initComponents();
         addKeyListenerTojTFCoKupiles();
         addKeyListenerTojTFWartosc();
+        addTooltipToElements();
     }
 
     @SuppressWarnings("unchecked")
@@ -39,7 +40,7 @@ public class ListaZakupow extends javax.swing.JFrame{
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jCBTyp = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jPListaZakupow = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -84,7 +85,7 @@ public class ListaZakupow extends javax.swing.JFrame{
 
         jLabel7.setText("Typ zakupionego towaru");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBTyp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("ZAPISZ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +124,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                         .addComponent(jTextField4))
                     .addGroup(jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBTyp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +149,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                     .addComponent(jTFCoKupiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFWartosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -219,11 +220,11 @@ public class ListaZakupow extends javax.swing.JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFCoKupiles.getText()+";");
         jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFWartosc.getText()+";");
-        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jComboBox1.getSelectedItem().toString()+";");
+        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jCBTyp.getSelectedItem().toString()+";");
         jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFData.getText()+";\n");
         jTFCoKupiles.setText("");
         jTFWartosc.setText("");
-        jComboBox1.setSelectedItem("Item 1");
+        jCBTyp.setSelectedItem("Item 1");
         jTFData.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -288,11 +289,24 @@ public class ListaZakupow extends javax.swing.JFrame{
             @Override
             public void keyTyped(KeyEvent e) {
                 char ch = e.getKeyChar();
-                if(ch >= '0' && ch <= '9' || ch == '-' || ch == KeyEvent.VK_BACK_SPACE){
-                    jTFWartosc.setEditable(true);
- //                   System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                String temp = jTFWartosc.getText();
+                
+                System.out.println(temp.indexOf(","));
+                
+                if(temp.contains(",")){
+                    String[] splitted = temp.split(",");
+                    if(ch >= '0' && ch <= '9' || ch == KeyEvent.VK_BACK_SPACE){
+                        jTFWartosc.setEditable(true);
+                    }else{
+                        jTFWartosc.setEditable(false);
+                    }
                 }else{
-                    jTFWartosc.setEditable(false);
+                    if(ch >= '0' && ch <= '9' || ch == '-' || ch == KeyEvent.VK_BACK_SPACE || ch ==','){
+                        jTFWartosc.setEditable(true);
+     //                   System.out.println("NACIŚNIĘTO CYFRĘ: "+ch);
+                    }else{
+                        jTFWartosc.setEditable(false);
+                    }
                 }
             }
 
@@ -305,6 +319,7 @@ public class ListaZakupow extends javax.swing.JFrame{
             }
         });
     }
+   
     private void addKeyListenerTojTFData(){
         jTFData.addKeyListener(new KeyListener() {
             @Override
@@ -332,13 +347,32 @@ public class ListaZakupow extends javax.swing.JFrame{
             }
         });
     }
-    
+   
+    private void addTooltipToElements(){
+        jTFCoKupiles.setToolTipText("<html>"
+                +"<h3>Wprowadz tekst</h3>"
+                +"<p>Nie uzywaj polskich znakow</p>"
+                +"</html>");
+        jTFWartosc.setToolTipText("<html>"
+                +"<h3>Wprowadz wartosc</h3>"
+                +"<p>Uzywaj tylko cyfr</p>"
+                +"</html>");
+        jCBTyp.setToolTipText("<html>"
+                +"<h3>Wprowadz wartosc</h3>"
+                +"<p>Uzywaj spośród podanych</p>"
+                +"</html>");
+        jTFData.setToolTipText("<html>"
+                +"<h3>Wprowadz date</h3>"
+                +"<p>Uzyj formatu d-m-r</p>"
+                +"</html>");
+        
+    }    
     
     
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCBTyp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
