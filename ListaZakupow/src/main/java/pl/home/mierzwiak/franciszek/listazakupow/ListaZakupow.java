@@ -4,6 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +23,7 @@ public class ListaZakupow extends javax.swing.JFrame{
         addKeyListenerTojTFCoKupiles();
         addKeyListenerTojTFWartosc();
         addTooltipToElements();
+        filljCBProducts();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,12 +42,12 @@ public class ListaZakupow extends javax.swing.JFrame{
         jScrollPane1 = new javax.swing.JScrollPane();
         jTADzisiejszeZakupy = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTFWydDzis = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTFWydTyg = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jCBTyp = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jCBProducts = new javax.swing.JComboBox<>();
+        jBSave = new javax.swing.JButton();
         jPListaZakupow = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -85,12 +91,17 @@ public class ListaZakupow extends javax.swing.JFrame{
 
         jLabel7.setText("Typ zakupionego towaru");
 
-        jCBTyp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton1.setText("ZAPISZ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jCBProducts.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBProducts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jCBProductsActionPerformed(evt);
+            }
+        });
+
+        jBSave.setText("ZAPISZ");
+        jBSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSaveActionPerformed(evt);
             }
         });
 
@@ -117,14 +128,14 @@ public class ListaZakupow extends javax.swing.JFrame{
                     .addGroup(jPWprowadzZakupyLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5))
+                        .addComponent(jTFWydTyg))
                     .addGroup(jPWprowadzZakupyLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(31, 31, 31)
-                        .addComponent(jTextField4))
+                        .addComponent(jTFWydDzis))
                     .addGroup(jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBTyp, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jCBProducts, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +143,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                             .addComponent(jTFData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jBSave)))
                 .addContainerGap())
         );
         jPWprowadzZakupyLayout.setVerticalGroup(
@@ -149,22 +160,22 @@ public class ListaZakupow extends javax.swing.JFrame{
                     .addComponent(jTFCoKupiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFWartosc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton1))
+                    .addComponent(jBSave))
                 .addGap(18, 18, 18)
                 .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPWprowadzZakupyLayout.createSequentialGroup()
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFWydDzis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPWprowadzZakupyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTFWydTyg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -217,16 +228,25 @@ public class ListaZakupow extends javax.swing.JFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFWartoscActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSaveActionPerformed
         jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFCoKupiles.getText()+";");
         jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFWartosc.getText()+";");
-        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jCBTyp.getSelectedItem().toString()+";");
+        jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jCBProducts.getSelectedItem().toString()+";");
         jTADzisiejszeZakupy.setText(jTADzisiejszeZakupy.getText()+jTFData.getText()+";\n");
         jTFCoKupiles.setText("");
         jTFWartosc.setText("");
-        jCBTyp.setSelectedItem("Item 1");
+        jCBProducts.setSelectedItem("Item 1");
         jTFData.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        JavaUtils stf = new JavaUtils();
+        String text = jTFCoKupiles.getText().trim()+";"+jTFWartosc.getText().trim()+";"
+               +jCBProducts.getSelectedItem().toString().trim()+";"+jTFData.getText().trim();
+        stf.saveToFile(text);
+    }//GEN-LAST:event_jBSaveActionPerformed
+
+    private void jCBProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBProductsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBProductsActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -347,6 +367,20 @@ public class ListaZakupow extends javax.swing.JFrame{
             }
         });
     }
+    private void filljCBProducts(){
+        ArticleTypeUtils atu = new ArticleTypeUtils();
+        //TODO read procucts from file!!!
+        jCBProducts.removeAllItems();
+        try {
+            Scanner sc = new Scanner(new File("produkty.txt"));
+            while(sc.hasNext()){
+                String item = sc.nextLine();
+                jCBProducts.addItem(item);
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.toString());
+        }
+    }
    
     private void addTooltipToElements(){
         jTFCoKupiles.setToolTipText("<html>"
@@ -357,7 +391,7 @@ public class ListaZakupow extends javax.swing.JFrame{
                 +"<h3>Wprowadz wartosc</h3>"
                 +"<p>Uzywaj tylko cyfr</p>"
                 +"</html>");
-        jCBTyp.setToolTipText("<html>"
+        jCBProducts.setToolTipText("<html>"
                 +"<h3>Wprowadz wartosc</h3>"
                 +"<p>Uzywaj spośród podanych</p>"
                 +"</html>");
@@ -365,14 +399,26 @@ public class ListaZakupow extends javax.swing.JFrame{
                 +"<h3>Wprowadz date</h3>"
                 +"<p>Uzyj formatu d-m-r</p>"
                 +"</html>");
-        
+        jTADzisiejszeZakupy.setToolTipText("<html>"
+                +"<h3>Tutaj pojawia sie wprowadzone dane</h3>"
+                +"</html>");
+        jTFWydDzis.setToolTipText("<html>"
+                +"<h3>Wydatki z dzisiaj</h3>"
+                +"</html>");
+        jTFWydTyg.setToolTipText("<html>"
+                +"<h3>Wydatki z tygodnia</h3>"
+                +"</html>");
+        jBSave.setToolTipText("<html>"
+                +"<h3>Zapis</h3>"
+                +"<p>Uzyj po wprowadzeniu wszystkich danych</p>"
+                +"</html>");
     }    
-    
-    
+    private String file_name = "lista_zakopow.csv";
+    private String product_names = "product_names.csv";
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jCBTyp;
+    private javax.swing.JButton jBSave;
+    private javax.swing.JComboBox<String> jCBProducts;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -390,9 +436,9 @@ public class ListaZakupow extends javax.swing.JFrame{
     private javax.swing.JTextField jTFCoKupiles;
     private javax.swing.JTextField jTFData;
     private javax.swing.JTextField jTFWartosc;
+    private javax.swing.JTextField jTFWydDzis;
+    private javax.swing.JTextField jTFWydTyg;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
    
 }
