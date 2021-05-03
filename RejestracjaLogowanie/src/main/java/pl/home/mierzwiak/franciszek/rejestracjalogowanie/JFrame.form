@@ -62,10 +62,14 @@
                                   <Component id="jLEmail" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLConfirmPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="JBRejestracja" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                                   <Component id="jLRejestracja" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="389" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="JBRejestracja" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLBlad" pref="371" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -93,7 +97,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPFPConfirmPassword" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="JBRejestracja" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLBlad" max="32767" attributes="0"/>
+                          <Component id="JBRejestracja" pref="50" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -148,6 +155,8 @@
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLBlad">
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPLogowanie">
@@ -166,16 +175,20 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jTFEmail2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPFPassword2" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLEmail2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLPassword2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLLogowanie" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="jBZaloguj" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="389" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jPFPassword2" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jBZaloguj" min="-2" pref="140" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLBlad2" pref="371" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -194,7 +207,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPFPassword2" min="-2" pref="40" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="jBZaloguj" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLBlad2" max="32767" attributes="0"/>
+                          <Component id="jBZaloguj" pref="50" max="32767" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -234,6 +250,8 @@
               </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPFPassword2">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLBlad2">
             </Component>
           </SubComponents>
         </Container>
