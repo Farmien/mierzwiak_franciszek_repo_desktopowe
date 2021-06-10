@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author frane
  */
-public class FileUtils{
+public class JavaUtils{
     private String file_name = "sekretnehasla.csv";
 
         public void saveToFile(String text){
@@ -24,7 +24,7 @@ public class FileUtils{
                 fw.write(text+"\n");
                 fw.close();
             } catch (IOException ex) {
-                Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(JavaUtils.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 }

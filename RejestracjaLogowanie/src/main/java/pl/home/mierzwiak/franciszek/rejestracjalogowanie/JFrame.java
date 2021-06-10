@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,7 +49,6 @@ public class JFrame extends javax.swing.JFrame {
         jPFPConfirmPassword = new javax.swing.JPasswordField();
         JBRejestracja = new javax.swing.JButton();
         jLRejestracja = new javax.swing.JLabel();
-        jLBlad = new javax.swing.JLabel();
         jPLogowanie = new javax.swing.JPanel();
         jLPassword2 = new javax.swing.JLabel();
         jTFEmail2 = new javax.swing.JTextField();
@@ -62,6 +62,7 @@ public class JFrame extends javax.swing.JFrame {
 
         jLUsername.setText("Username");
 
+        jTFUsername.setToolTipText("minimum 2 znaki maksymalnie 20, tylko litery");
         jTFUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFUsernameActionPerformed(evt);
@@ -70,9 +71,15 @@ public class JFrame extends javax.swing.JFrame {
 
         jLEmail.setText("Email");
 
+        jTFEmail.setToolTipText(" litera/litery potem @ a na nią znajduje się przynajmniej jedna litera, następnie kropka, następnie litery");
+
         jLPassword.setText("Password");
 
         jLConfirmPassword.setText("Confirm Password");
+
+        jPFPassword.setToolTipText(" minimum 4 znaki, tylko liczby i litery");
+
+        jPFPConfirmPassword.setToolTipText("takie samo jak haslo");
 
         JBRejestracja.setText("Rejestracja");
         JBRejestracja.addActionListener(new java.awt.event.ActionListener() {
@@ -102,12 +109,9 @@ public class JFrame extends javax.swing.JFrame {
                             .addComponent(jLEmail)
                             .addComponent(jLPassword)
                             .addComponent(jLConfirmPassword)
-                            .addComponent(jLRejestracja, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPRejestracjaLayout.createSequentialGroup()
-                        .addComponent(JBRejestracja, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLBlad, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)))
+                            .addComponent(jLRejestracja, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JBRejestracja, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 389, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPRejestracjaLayout.setVerticalGroup(
@@ -131,9 +135,7 @@ public class JFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPFPConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPRejestracjaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLBlad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JBRejestracja, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
+                .addComponent(JBRejestracja, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -233,7 +235,42 @@ public class JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFEmail2ActionPerformed
 
     private void jBZalogujActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBZalogujActionPerformed
-
+        boolean invalidEmail = true;
+        boolean invalidPassword = true;
+        try {
+            String login = jTFEmail2.getText();
+            String haslo = new String(jPFPassword2.getPassword());
+            File plik = new File("sekretnehasla.csv");
+            Scanner odczyt = new Scanner(plik);
+            String check = "";
+            String username = "";
+            while(invalidEmail == true && odczyt.hasNextLine() || invalidPassword == true && odczyt.hasNextLine()){
+                check = odczyt.nextLine();
+                String check2[] = check.split(";");
+                if(login.equals(check2[1])){
+                    invalidEmail = false;
+                }else{
+                    invalidEmail = true;
+                }
+                if(haslo.equals(check2[2])){
+                    invalidPassword = false;
+                }else{
+                    invalidPassword = true;
+                }
+                if(invalidEmail == false && invalidPassword == false){
+                    username = check2[0];
+                }else{
+                    invalidPassword = true;
+                    invalidEmail = true;
+                }
+            }
+            
+            if(invalidEmail == false && invalidPassword == false){
+                JOptionPane.showMessageDialog(null, "Witaj " + username);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(JFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jBZalogujActionPerformed
 
     /**
@@ -269,6 +306,30 @@ public class JFrame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -281,42 +342,42 @@ public class JFrame extends javax.swing.JFrame {
     
     private void SprawdzankoRejestracji() throws IOException{
         //Sprawdzanie Username
-        boolean usernamespr = true;
+        boolean usernamespr = false;
         String username = jTFUsername.getText();
         if(username.length() < 2 || username.length() > 20){
-            usernamespr = false;
+            usernamespr = true;
         }else{
             for(int i=0; i<username.length(); i++){
                 char ch = username.charAt(i);
                 if(ch < 'A' || ch > 'z'){
-                    usernamespr = false;
+                    usernamespr = true;
                 }
             }
         }
         
-        //Sprawdzanie Email
+        //sprawdzenie poprawnosci emaila
         boolean emailspr = true;
         String email = jTFEmail.getText();
-        if(email.contains("@")){
-            String tab[] = email.split("@");
-            if(tab[0] == "@"){
-                emailspr = false;
-            }else{
-                for(int i=0; i<tab[0].length(); i++){
-                    char ch = tab[0].charAt(i);
-                    if(ch < 'A' || ch > 'z'){
+        if(email.contains("@") && email.indexOf("@") > 0 && email.indexOf("@")+1 < email.length()){ //czy email zawiera @ i czy @ nie jest na początku albo koncu
+            String ema1[] = email.split("@");
+            String emaFinal = ema1[0] + ema1[1] + "a";
+            if(emaFinal.length() == email.length()){ //czy email nie zawiera kilku @
+                if(ema1[1].contains(".") && ema1[1].indexOf(".") > 0 && ema1[1].indexOf(".")+1 < ema1[1].length()){ //czy email zawiera . i czy . nie jest na początku albo koncu
+                    String ema2[] = ema1[1].split("\\.");
+                    emaFinal = ema2[0] + ema2[1] + "a";
+                    if(emaFinal.length() == ema1[1].length()){ //czy email nie zawiera kilku .
                         emailspr = false;
+                        for(int i=0; i<email.length(); i++){
+                            char ch = email.charAt(i);
+                            if(ch == '@'); //pominiecie @
+                            else if(ch == '.'); //pominiecie .
+                            else if(!((ch >= 'A' && ch<= 'Z') || (ch <= 'z' && ch>= 'a'))){ //sprawdzanie czy są same litery
+                                emailspr = true;
+                            }
+                        }
                     }
                 }
-                if(tab[1].contains(".")){
-                    String []tab2 = tab[1].split(".");
-                    if(tab2[0].length() < 1 || tab2[1].length() < 1){
-                        emailspr = true;
-                    }
-                }
-            }
-        }else{
-            emailspr = false;
+            } 
         }
         
         //Sprawdzanie Password
@@ -343,23 +404,23 @@ public class JFrame extends javax.swing.JFrame {
         
         //bladzik
         String blad = "<html>";
-        if(usernamespr == false){
-            blad += "Niepoprawna nazwa uzytkownika ";
+        if(usernamespr == true){
+            blad += "Niepoprawna nazwa uzytkownika <br>";
         }
-        if(emailspr == false){
-            blad += "Niepoprawny email ";
-        }
-        if(passwordspr == true){
-            blad += "Niepoprawne haslo ";
+        if(emailspr == true){
+            blad += "Niepoprawny email <br>";
         }
         if(passwordspr == true){
-            blad += "Hasla sa rozne";
+            blad += "Niepoprawne haslo <br>";
+        }
+        if(cpasswordspr == true){
+            blad += "Hasla sa rozne <br>";
         }
         blad += "</html>";
-        jLBlad.setText(blad);
+        JOptionPane.showMessageDialog(null, blad);
         
-        if(usernamespr == true && passwordspr == false && cpasswordspr == false){
-            FileUtils stf = new FileUtils();
+        if(usernamespr == false && emailspr == false && passwordspr == false && cpasswordspr == false){
+            JavaUtils stf = new JavaUtils();
             String text = username+";"+email+";"+password;
             stf.saveToFile(text);
         }
@@ -369,7 +430,6 @@ public class JFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBRejestracja;
     private javax.swing.JButton jBZaloguj;
-    private javax.swing.JLabel jLBlad;
     private javax.swing.JLabel jLBlad2;
     private javax.swing.JLabel jLConfirmPassword;
     private javax.swing.JLabel jLEmail;
