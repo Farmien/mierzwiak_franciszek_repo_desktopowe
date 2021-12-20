@@ -18,6 +18,9 @@ public class JDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    public String JDialog(){
+        return jTFName.getText()+";"+jTFSurname.getText()+";"+jTFClass.getText()+";"+jTFYear.getText();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,6 +53,11 @@ public class JDialog extends javax.swing.JDialog {
         jLYear.setText("Rok:");
 
         jButton1.setText("DODAJ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,6 +120,10 @@ public class JDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

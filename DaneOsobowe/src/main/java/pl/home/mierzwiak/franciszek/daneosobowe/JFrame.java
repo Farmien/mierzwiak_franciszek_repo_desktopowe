@@ -5,7 +5,10 @@
  */
 package pl.home.mierzwiak.franciszek.daneosobowe;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
@@ -14,7 +17,7 @@ import javax.swing.JList;
  * @author frane
  */
 public class JFrame extends javax.swing.JFrame {
-    DefaultListModel model;
+    DefaultListModel model = new DefaultListModel();;
     ArrayList<DaneOsobowe> list = new ArrayList<>();
     /**
      * Creates new form JFrame
@@ -36,6 +39,7 @@ public class JFrame extends javax.swing.JFrame {
         jSPMain = new javax.swing.JScrollPane();
         jLiMain = new javax.swing.JList<>();
         jBAdd = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,10 +50,17 @@ public class JFrame extends javax.swing.JFrame {
         });
         jSPMain.setViewportView(jLiMain);
 
-        jBAdd.setText("ADD");
+        jBAdd.setText("Dodaj");
         jBAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAddActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Zapisz");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -61,14 +72,19 @@ public class JFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMainLayout.createSequentialGroup()
+                        .addComponent(jBAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jBAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSPMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -90,8 +106,18 @@ public class JFrame extends javax.swing.JFrame {
 
     private void jBAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddActionPerformed
         list.add(new DaneOsobowe("G","G","g",122));
-        model.addElement("0");
+        model.addElement(list.get(0).getImie());
+        jLiMain.setModel(model);
     }//GEN-LAST:event_jBAddActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        SaveToFile stf = new SaveToFile();
+        try {
+            stf.saveToFile("daneosobowe.csv", list);
+        } catch (IOException ex) {
+            Logger.getLogger(JFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,9 +154,13 @@ public class JFrame extends javax.swing.JFrame {
         
         });
     }
+    public JDialog(){
+        return
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdd;
+    private javax.swing.JButton jButton1;
     private javax.swing.JList<String> jLiMain;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jSPMain;
