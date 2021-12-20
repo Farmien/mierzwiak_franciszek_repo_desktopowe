@@ -7,13 +7,15 @@ package pl.home.mierzwiak.franciszek.daneosobowe;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 
 /**
  *
  * @author frane
  */
 public class JFrame extends javax.swing.JFrame {
-
+    DefaultListModel model;
+    ArrayList<DaneOsobowe> list = new ArrayList<>();
     /**
      * Creates new form JFrame
      */
@@ -31,18 +33,18 @@ public class JFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelMain = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList = new javax.swing.JList<>();
+        jSPMain = new javax.swing.JScrollPane();
+        jLiMain = new javax.swing.JList<>();
         jBAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList.setModel(new javax.swing.AbstractListModel<String>() {
+        jLiMain.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList);
+        jSPMain.setViewportView(jLiMain);
 
         jBAdd.setText("ADD");
         jBAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +60,7 @@ public class JFrame extends javax.swing.JFrame {
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -68,7 +70,7 @@ public class JFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jBAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSPMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -87,7 +89,8 @@ public class JFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddActionPerformed
-        // TODO add your handling code here:
+        list.add(new DaneOsobowe("G","G","g",122));
+        model.addElement("0");
     }//GEN-LAST:event_jBAddActionPerformed
 
     /**
@@ -125,13 +128,11 @@ public class JFrame extends javax.swing.JFrame {
         
         });
     }
-    DefaultListModel model;
-    ArrayList<DaneOsobowe> list;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdd;
-    private javax.swing.JList<String> jList;
+    private javax.swing.JList<String> jLiMain;
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jSPMain;
     // End of variables declaration//GEN-END:variables
 }
