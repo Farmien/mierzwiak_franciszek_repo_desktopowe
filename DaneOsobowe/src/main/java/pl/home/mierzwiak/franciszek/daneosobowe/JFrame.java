@@ -35,11 +35,14 @@ public class JFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOP = new javax.swing.JOptionPane();
+        jPM = new javax.swing.JPopupMenu();
         jPanelMain = new javax.swing.JPanel();
         jSPMain = new javax.swing.JScrollPane();
         jLiMain = new javax.swing.JList<>();
         jBAdd = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jBAdd1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,9 +61,17 @@ public class JFrame extends javax.swing.JFrame {
         });
 
         jButton1.setText("Zapisz");
+        jButton1.setMaximumSize(new java.awt.Dimension(61, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jBAdd1.setText("Dodaj");
+        jBAdd1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAdd1ActionPerformed(evt);
             }
         });
 
@@ -75,16 +86,19 @@ public class JFrame extends javax.swing.JFrame {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addComponent(jBAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jBAdd1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSPMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -112,12 +126,12 @@ public class JFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SaveToFile stf = new SaveToFile();
-        try {
-            stf.saveToFile("daneosobowe.csv", list);
-        } catch (IOException ex) {
-            Logger.getLogger(JFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        stf.saveToFile(list.get(0).getImie());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jBAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdd1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBAdd1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,13 +167,14 @@ public class JFrame extends javax.swing.JFrame {
             }
         
         });
-    }
-    
-
+    }    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdd;
+    private javax.swing.JButton jBAdd1;
     private javax.swing.JButton jButton1;
     private javax.swing.JList<String> jLiMain;
+    private javax.swing.JOptionPane jOP;
+    private javax.swing.JPopupMenu jPM;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JScrollPane jSPMain;
     // End of variables declaration//GEN-END:variables
