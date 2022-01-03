@@ -21,7 +21,8 @@ public class JDialog extends javax.swing.JDialog {
     public String JDialog(){
         return jTFName.getText()+";"+jTFSurname.getText()+";"+jTFClass.getText()+";"+jTFYear.getText();
     }
-
+    String name,surname,klass;
+    int year;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,9 +123,16 @@ public class JDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        name = jTFName.getText();
+        surname = jTFSurname.getText();
+        klass = jTFClass.getText();
+        year = Integer.parseInt(jTFYear.getText());
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public DaneOsobowe getDaneOsobowe(){
+        return new DaneOsobowe(name,surname,klass,year);
+    }
     /**
      * @param args the command line arguments
      */

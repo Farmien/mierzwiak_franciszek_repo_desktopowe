@@ -19,6 +19,8 @@ import javax.swing.JList;
 public class JFrame extends javax.swing.JFrame {
     DefaultListModel model = new DefaultListModel();;
     ArrayList<DaneOsobowe> list = new ArrayList<>();
+    static int count = 0;
+    
     /**
      * Creates new form JFrame
      */
@@ -41,16 +43,11 @@ public class JFrame extends javax.swing.JFrame {
         jSPMain = new javax.swing.JScrollPane();
         jLiMain = new javax.swing.JList<>();
         jBAdd = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jBAdd1 = new javax.swing.JButton();
+        jBSave = new javax.swing.JButton();
+        jBRemove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLiMain.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jSPMain.setViewportView(jLiMain);
 
         jBAdd.setText("Dodaj");
@@ -60,18 +57,17 @@ public class JFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Zapisz");
-        jButton1.setMaximumSize(new java.awt.Dimension(61, 23));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBSave.setText("Zapisz");
+        jBSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBSaveActionPerformed(evt);
             }
         });
 
-        jBAdd1.setText("Dodaj");
-        jBAdd1.addActionListener(new java.awt.event.ActionListener() {
+        jBRemove.setText("Usun");
+        jBRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAdd1ActionPerformed(evt);
+                jBRemoveActionPerformed(evt);
             }
         });
 
@@ -86,19 +82,19 @@ public class JFrame extends javax.swing.JFrame {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addComponent(jBAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBAdd1)
+                        .addComponent(jBSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBRemove)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBRemove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jBSave, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSPMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -119,20 +115,39 @@ public class JFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAddActionPerformed
-        list.add(new DaneOsobowe("G","G","g",122));
-        model.addElement(list.get(0).getImie());
+        list.add(showJDialog());
+        model.addElement(list.get(count).getImie());
         jLiMain.setModel(model);
+        count++;
     }//GEN-LAST:event_jBAddActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        SaveToFile stf = new SaveToFile();
-        stf.saveToFile(list.get(0).getImie());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSaveActionPerformed
+        try{
+            SaveToFile stf = new SaveToFile();
+            stf.clearFile();
+            int i = 0;
+            while(!list.get(i).getImie().equals("")){
+                stf.saveToFile(list.get(i).getDaneOsobowe());
+                i++;
+            }
+        }catch (IndexOutOfBoundsException e){
+            
+        }
+    }//GEN-LAST:event_jBSaveActionPerformed
 
-    private void jBAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdd1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBAdd1ActionPerformed
+    private void jBRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoveActionPerformed
+        model.removeElementAt(jLiMain.getSelectedIndex());
+        list.remove(jLiMain.getSelectedIndex());
+        count--;
+    }//GEN-LAST:event_jBRemoveActionPerformed
 
+    private DaneOsobowe showJDialog(){
+        JDialog jD = new JDialog(this,true);
+        jD.setVisible(true);
+        DaneOsobowe daneOsobowe = jD.getDaneOsobowe();
+        jD = null;
+        return daneOsobowe;
+    }
     /**
      * @param args the command line arguments
      */
@@ -170,8 +185,8 @@ public class JFrame extends javax.swing.JFrame {
     }    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdd;
-    private javax.swing.JButton jBAdd1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBRemove;
+    private javax.swing.JButton jBSave;
     private javax.swing.JList<String> jLiMain;
     private javax.swing.JOptionPane jOP;
     private javax.swing.JPopupMenu jPM;

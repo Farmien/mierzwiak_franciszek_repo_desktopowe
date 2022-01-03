@@ -51,5 +51,7 @@ public class DaneOsobowe {
     public void setRok(int rok) {
         this.rok = rok;
     }
-    
+    public String getDaneOsobowe(){
+        return imie+";"+nazwisko+";"+klasa+";"+rok;
+    }
 }
