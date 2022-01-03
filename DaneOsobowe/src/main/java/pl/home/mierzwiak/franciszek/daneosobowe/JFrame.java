@@ -154,9 +154,7 @@ public class JFrame extends javax.swing.JFrame {
         
         });
     }
-    public JDialog(){
-        return
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdd;
